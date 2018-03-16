@@ -1,0 +1,150 @@
+package com.powermilk;
+
+import org.junit.Rule;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.platform.runner.JUnitPlatform;
+import org.junit.platform.suite.api.SelectPackages;
+import org.junit.rules.ExpectedException;
+import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.math.BigInteger;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+@RunWith(JUnitPlatform.class)
+@DisplayName("Testing Fibonacci class")
+@SelectPackages("com.powermilk")
+class FibonacciTest {
+    private static final Logger log = LoggerFactory.getLogger(FibonacciTest.class);
+
+    @Rule
+    public ExpectedException expectedThrown = ExpectedException.none();
+
+    @BeforeEach
+    public void init() throws Exception {
+        log.info("Test started!");
+    }
+
+    @AfterEach
+    public void tearDown() {
+        log.info("Test finished!");
+    }
+
+    @Test
+    @DisplayName("Calculate should throws ArithmeticException (negative number as input)")
+    void shouldThrowsCalculatingArithmeticExceptionForNegative() {
+        try {
+            Fibonacci.calculateFibonacciNumber(-1);
+        } catch (ArithmeticException e) {
+            expectedThrown.expect(ArithmeticException.class);
+            log.error(e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Calculate should throws ArithmeticException (0 as input)")
+    void shouldThrowsCalculatingArithmeticExceptionForInputZero() {
+        try {
+            Fibonacci.calculateFibonacciNumber(0);
+        } catch (ArithmeticException e) {
+            expectedThrown.expect(ArithmeticException.class);
+            log.error(e.getMessage());
+        }
+    }
+
+    @Test
+    @DisplayName("Calculate should passed (1 as input)")
+    void shouldPassCalculatingForOneAsInput() {
+        BigInteger expected = BigInteger.ONE;
+        BigInteger actual = Fibonacci.calculateFibonacciNumber(1);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Calculate should passed (2 as input)")
+    void shouldPassCalculatingForTwoAsInput() {
+        BigInteger expected = BigInteger.ONE;
+        BigInteger actual = Fibonacci.calculateFibonacciNumber(2);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Calculate should passed (small number as output)")
+    void shouldPassCalculatingSmallNumberAsOutput() {
+        BigInteger expected = BigInteger.valueOf(8);
+        BigInteger actual = Fibonacci.calculateFibonacciNumber(6);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Calculate should passed (big number as output)")
+    void shouldPassCalculatingBigNumberAsOutput() {
+        BigInteger expected = BigInteger.valueOf(10610209857723L);
+        BigInteger actual = Fibonacci.calculateFibonacciNumber(64);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Printing should returns empty string (negative number as input)")
+    void shouldThrowsPrintingEmptyStringForNegative() {
+        String expected = "";
+        String actual = Fibonacci.printFibonacciSeries(-1);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+
+    }
+
+    @Test
+    @DisplayName("Printing should returns empty string (0 as input)")
+    void shouldThrowsPrintingEmptyStringForInputZero() {
+        String expected = "";
+        String actual = Fibonacci.printFibonacciSeries(0);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Printing should passed (1 as input)")
+    void shouldPassPrintingForOneAsInput() {
+        String expected = "1";
+        String actual = Fibonacci.printFibonacciSeries(1);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Printing should passed (2 as input)")
+    void shouldPassPrintingForTwoAsInput() {
+        String expected = "1, 1";
+        String actual = Fibonacci.printFibonacciSeries(2);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Printing should passed (short string as output)")
+    void shouldPassPrintingShortStringAsOutput() {
+        String expected = "1, 1, 2, 3, 5, 8";
+        String actual = Fibonacci.printFibonacciSeries(6);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+
+    @Test
+    @DisplayName("Printing should passed (long string as output)")
+    void shouldPassPrintingLongStringAsOutput() {
+        String expected = "1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144";
+        String actual = Fibonacci.printFibonacciSeries(12);
+        assertEquals(expected, actual);
+        log.info("Test passed!");
+    }
+}
