@@ -1,13 +1,11 @@
 package com.powermilk;
 
-import org.junit.Rule;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.runner.JUnitPlatform;
 import org.junit.platform.suite.api.SelectPackages;
-import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import java.math.BigInteger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @RunWith(JUnitPlatform.class)
 @DisplayName("Testing Fibonacci class")
@@ -22,39 +21,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class FibonacciTest {
     private static final Logger log = LoggerFactory.getLogger(FibonacciTest.class);
 
-    @Rule
-    public ExpectedException expectedThrown = ExpectedException.none();
-
     @BeforeEach
-    public void init() throws Exception {
+    void init() {
         log.info("Test started!");
     }
 
     @AfterEach
-    public void tearDown() {
+    void tearDown() {
         log.info("Test finished!");
     }
 
     @Test
     @DisplayName("Calculate should throws ArithmeticException (negative number as input)")
     void shouldThrowsCalculatingArithmeticExceptionForNegative() {
-        try {
-            Fibonacci.calculateFibonacciNumber(-1);
-        } catch (ArithmeticException e) {
-            expectedThrown.expect(ArithmeticException.class);
-            log.error(e.getMessage());
-        }
+        Throwable exception = assertThrows(ArithmeticException.class, () -> Fibonacci.calculateFibonacciNumber(-1));
+        assertEquals(exception.getMessage(), "The number should be bigger than 0");
+        log.error(exception.getMessage());
     }
 
     @Test
     @DisplayName("Calculate should throws ArithmeticException (0 as input)")
     void shouldThrowsCalculatingArithmeticExceptionForInputZero() {
-        try {
-            Fibonacci.calculateFibonacciNumber(0);
-        } catch (ArithmeticException e) {
-            expectedThrown.expect(ArithmeticException.class);
-            log.error(e.getMessage());
-        }
+        Throwable exception = assertThrows(ArithmeticException.class, () -> Fibonacci.calculateFibonacciNumber(0));
+        assertEquals(exception.getMessage(), "The number should be bigger than 0");
+        log.error(exception.getMessage());
     }
 
     @Test

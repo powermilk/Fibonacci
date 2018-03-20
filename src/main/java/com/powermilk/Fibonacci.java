@@ -7,8 +7,7 @@ import java.util.stream.IntStream;
 public class Fibonacci {
     public static BigInteger calculateFibonacciNumber(int number) {
         if(number < 1) {
-            ArithmeticException exception = new ArithmeticException("The number should be more than 0");
-            throw exception;
+            throw new ArithmeticException("The number should be bigger than 0");
         }
 
         if(number == 1 || number == 2) {
@@ -32,7 +31,7 @@ public class Fibonacci {
         return IntStream
                 .rangeClosed(1, number)
                 .boxed()
-                .map(i -> calculateFibonacciNumber(i))
+                .map(Fibonacci::calculateFibonacciNumber)
                 .map(BigInteger::toString)
                 .collect(Collectors.joining(", "));
     }
