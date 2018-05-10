@@ -36,33 +36,33 @@ class FibonacciTest {
     void shouldThrowsCalculatingArithmeticExceptionForNegative() {
         Throwable exception = assertThrows(ArithmeticException.class, () -> Fibonacci.calculateFibonacciNumber(-1));
         assertEquals(exception.getMessage(), "The number should be bigger than 0");
-        log.error(exception.getMessage());
+        log.info("Test for calculate for negative as input passed!");
     }
 
     @Test
     @DisplayName("Calculate should throws ArithmeticException (0 as input)")
-    void shouldThrowsCalculatingArithmeticExceptionForInputZero() {
+    void shouldThrowsCalculatingArithmeticExceptionForZeroAsInput() {
         Throwable exception = assertThrows(ArithmeticException.class, () -> Fibonacci.calculateFibonacciNumber(0));
         assertEquals(exception.getMessage(), "The number should be bigger than 0");
-        log.error(exception.getMessage());
+        log.info("Test for calculate for 0 as input passed!");
     }
 
     @Test
-    @DisplayName("Calculate should passed (1 as input)")
+    @DisplayName("Calculate should return 1 (1 as input)")
     void shouldPassCalculatingForOneAsInput() {
         BigInteger expected = BigInteger.ONE;
         BigInteger actual = Fibonacci.calculateFibonacciNumber(1);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for calculate for 1 as input passed!");
     }
 
     @Test
-    @DisplayName("Calculate should passed (2 as input)")
+    @DisplayName("Calculate should return 1 (2 as input)")
     void shouldPassCalculatingForTwoAsInput() {
         BigInteger expected = BigInteger.ONE;
         BigInteger actual = Fibonacci.calculateFibonacciNumber(2);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for calculate for 2 as input passed!");
     }
 
     @Test
@@ -71,7 +71,7 @@ class FibonacciTest {
         BigInteger expected = BigInteger.valueOf(8);
         BigInteger actual = Fibonacci.calculateFibonacciNumber(6);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for calculate small series passed!");
     }
 
     @Test
@@ -80,7 +80,7 @@ class FibonacciTest {
         BigInteger expected = BigInteger.valueOf(10610209857723L);
         BigInteger actual = Fibonacci.calculateFibonacciNumber(64);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for calculate big series passed!");
     }
 
     @Test
@@ -89,17 +89,17 @@ class FibonacciTest {
         String expected = "";
         String actual = Fibonacci.printFibonacciSeries(-1);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing empty string for negative passed!");
 
     }
 
     @Test
     @DisplayName("Printing should returns empty string (0 as input)")
-    void shouldThrowsPrintingEmptyStringForInputZero() {
+    void shouldThrowsPrintingEmptyStringForZeroAsInput() {
         String expected = "";
         String actual = Fibonacci.printFibonacciSeries(0);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing empty string for 0 passed!");
     }
 
     @Test
@@ -108,7 +108,7 @@ class FibonacciTest {
         String expected = "1";
         String actual = Fibonacci.printFibonacciSeries(1);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing string for 1 as input passed!");
     }
 
     @Test
@@ -117,7 +117,7 @@ class FibonacciTest {
         String expected = "1, 1";
         String actual = Fibonacci.printFibonacciSeries(2);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing string for 2 as input passed!");
     }
 
     @Test
@@ -126,7 +126,7 @@ class FibonacciTest {
         String expected = "1, 1, 2, 3, 5, 8";
         String actual = Fibonacci.printFibonacciSeries(6);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing short string passed!");
     }
 
     @Test
@@ -135,6 +135,6 @@ class FibonacciTest {
         String expected = "1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144";
         String actual = Fibonacci.printFibonacciSeries(12);
         assertEquals(expected, actual);
-        log.info("Test passed!");
+        log.info("Test for printing long string passed!");
     }
 }
